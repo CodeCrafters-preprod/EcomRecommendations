@@ -1,0 +1,15 @@
+{
+    "UID001": {
+      "Recommendations": [
+        { "category": "Bag", "PID": "PID001", "rating": 4.5 },
+        { "category": "Shoes", "PID": "PID002", "rating": 4.0 }
+      ]
+    },
+    "UID002": {
+      "Recommendations": [
+        { "category": "Perfume", "PID": "PID003", "rating": 5.0 },
+        { "category": "Tshirt", "PID": "PID004", "rating": 3.5 }
+      ]
+    }
+}
+  
