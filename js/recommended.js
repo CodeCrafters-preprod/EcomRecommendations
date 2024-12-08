@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- Carousel Functionality ---
     const carousel = document.querySelector(".carousel");
     const rightArrow = document.querySelector(".carousel-arrow.right");
     const leftArrow = document.querySelector(".carousel-arrow.left");
@@ -54,22 +53,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     rightArrow.addEventListener("click", () => {
         const totalItems = document.querySelectorAll(".carousel-item").length;
-        currentIndex = (currentIndex + 1) % totalItems;
+        currentIndex = (currentIndex + 1) % totalItems; // Wrap to the start if at the end
         scrollToIndex(currentIndex);
     });
 
     leftArrow.addEventListener("click", () => {
         const totalItems = document.querySelectorAll(".carousel-item").length;
-        currentIndex = (currentIndex + totalItems - 1) % totalItems;
+        currentIndex = (currentIndex - 1 + totalItems) % totalItems; // Wrap to the end if at the start
         scrollToIndex(currentIndex);
     });
 
     // Automatic Carousel Movement
     setInterval(() => {
         const totalItems = document.querySelectorAll(".carousel-item").length;
-        currentIndex = (currentIndex + 1) % totalItems;
-        scrollToIndex(currentIndex);
-    }, 3000);
+        currentIndex = (currentIndex + 1) % totalItems; // Increment index (loop back to the start if needed)
+        if (currentIndex === 0) {
+            // Special handling for resetting to the first item
+            carousel.scrollTo({
+                left: 0, // Scroll to the extreme left (first image)
+                behavior: "instant", // Instantly reset without smooth animation
+            });
+        } else {
+            scrollToIndex(currentIndex); // Scroll to the updated index
+        }
+    }, 3000); // Change items every 3 seconds
 
     // --- Recommendations Functionality ---
     // Fetch users.json to get UID based on the username
