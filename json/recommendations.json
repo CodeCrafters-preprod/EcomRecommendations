@@ -1,15 +1,51 @@
 {
-    "UID001": {
-      "Recommendations": [
-        { "category": "Bag", "PID": "PID001", "rating": 4.5 },
-        { "category": "Shoes", "PID": "PID002", "rating": 4.0 }
-      ]
-    },
-    "UID002": {
-      "Recommendations": [
-        { "category": "Perfume", "PID": "PID003", "rating": 5.0 },
-        { "category": "Tshirt", "PID": "PID004", "rating": 3.5 }
-      ]
-    }
+  "UID001": {
+    "Recommendations": [
+      { "category": "Bag", "PID": "PID001", "rating": 4.5 },
+      { "category": "Shoes", "PID": "PID002", "rating": 4.0 },
+      { "category": "Perfume", "PID": "PID003", "rating": 4.8 }
+    ]
+  },
+  "UID002": {
+    "Recommendations": [
+      { "category": "Tshirt", "PID": "PID004", "rating": 5.0 },
+      { "category": "Bottle", "PID": "PID005", "rating": 3.5 },
+      { "category": "Cosmetics", "PID": "PID006", "rating": 4.3 }
+    ]
+  },
+  "UID003": {
+    "Recommendations": [
+      { "category": "Headphones", "PID": "PID007", "rating": 4.9 },
+      { "category": "Speaker", "PID": "PID008", "rating": 4.7 },
+      { "category": "Sunglasses", "PID": "PID009", "rating": 4.6 }
+    ]
+  },
+  "UID004": {
+    "Recommendations": [
+      { "category": "Watch", "PID": "PID0010", "rating": 4.6 },
+      { "category": "Bag", "PID": "PID001", "rating": 4.2 },
+      { "category": "Shoes", "PID": "PID002", "rating": 4.4 }
+    ]
+  },
+  "UID005": {
+    "Recommendations": [
+      { "category": "Perfume", "PID": "PID003", "rating": 4.9 },
+      { "category": "Tshirt", "PID": "PID004", "rating": 4.5 },
+      { "category": "Bottle", "PID": "PID005", "rating": 4.8 }
+    ]
+  },
+  "UID006": {
+    "Recommendations": [
+      { "category": "Cosmetics", "PID": "PID006", "rating": 4.7 },
+      { "category": "Headphones", "PID": "PID007", "rating": 4.8 },
+      { "category": "Speaker", "PID": "PID008", "rating": 4.6 }
+    ]
+  },
+  "UID007": {
+    "Recommendations": [
+      { "category": "Sunglasses", "PID": "PID009", "rating": 4.9 },
+      { "category": "Watch", "PID": "PID0010", "rating": 4.8 },
+      { "category": "Tshirt", "PID": "PID004", "rating": 4.5 }
+    ]
+  }
 }
-  
