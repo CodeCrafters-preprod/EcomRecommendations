@@ -175,6 +175,7 @@ Now, open the `homepage.html` file in your browser. Simply double-click on the f
 ## How to Use
 
 - Navigate through the homepage to view products.
+- Open Terminal and run http-server to serve recommendation images from products to server
 - Click on a product to view more details.
 - Add products to your cart by clicking the "Add to Cart" button.
 - View your cart from the cart icon at the top of the page.
