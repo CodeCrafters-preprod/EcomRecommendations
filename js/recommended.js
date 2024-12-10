@@ -22,56 +22,68 @@
 
 // To use: Include this JavaScript file in the "recommended.html" to enable carousel scrolling,
 //        zoom effects, and dynamic content updates for a personalized and interactive user experience.
+// Import product images from a JSON file
 import productImages from '../json/productImages.js';
+
+// Wait until the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
     // --- Navbar Functionality ---
+    // Select all navbar links
     const navbarLinks = document.querySelectorAll(".navbar a");
 
+    // Add click event listeners to each navbar link
     navbarLinks.forEach((link) => {
         link.addEventListener("click", (e) => {
-            e.preventDefault();
-            navbarLinks.forEach((link) => link.classList.remove("active"));
-            link.classList.add("active");
-            const targetPage = link.getAttribute("href");
-            window.location.href = targetPage;
+            e.preventDefault(); // Prevent default link behavior (page reload)
+            navbarLinks.forEach((link) => link.classList.remove("active")); // Remove 'active' class from all links
+            link.classList.add("active"); // Add 'active' class to the clicked link
+            const targetPage = link.getAttribute("href"); // Get the href attribute value
+            window.location.href = targetPage; // Navigate to the target page
         });
     });
 
+    // --- Carousel Setup ---
+    // Select carousel and its navigation arrows
     const carousel = document.querySelector(".carousel");
     const rightArrow = document.querySelector(".carousel-arrow.right");
     const leftArrow = document.querySelector(".carousel-arrow.left");
 
+    // Initialize the current index for carousel items
     let currentIndex = 0;
 
+    // Function to scroll carousel to a specific index
     function scrollToIndex(index) {
-        const items = document.querySelectorAll(".carousel-item");
+        const items = document.querySelectorAll(".carousel-item"); // Get all carousel items
         if (items.length) {
-            const offset = items[index]?.offsetLeft || 0;
-            carousel.scrollTo({ left: offset, behavior: "smooth" });
+            const offset = items[index]?.offsetLeft || 0; // Get the offset position of the item
+            carousel.scrollTo({ left: offset, behavior: "smooth" }); // Smoothly scroll to the item's position
         }
     }
 
+    // Add click event listener for the right arrow
     rightArrow.addEventListener("click", () => {
-        const totalItems = document.querySelectorAll(".carousel-item").length;
-        currentIndex = (currentIndex + 1) % totalItems; // Wrap to the start if at the end
-        scrollToIndex(currentIndex);
+        const totalItems = document.querySelectorAll(".carousel-item").length; // Get total number of items
+        currentIndex = (currentIndex + 1) % totalItems; // Increment index and wrap around if needed
+        scrollToIndex(currentIndex); // Scroll to the updated index
     });
 
+    // Add click event listener for the left arrow
     leftArrow.addEventListener("click", () => {
-        const totalItems = document.querySelectorAll(".carousel-item").length;
-        currentIndex = (currentIndex - 1 + totalItems) % totalItems; // Wrap to the end if at the start
-        scrollToIndex(currentIndex);
+        const totalItems = document.querySelectorAll(".carousel-item").length; // Get total number of items
+        currentIndex = (currentIndex - 1 + totalItems) % totalItems; // Decrement index and wrap around if needed
+        scrollToIndex(currentIndex); // Scroll to the updated index
     });
 
-    // Automatic Carousel Movement
+    // --- Automatic Carousel Movement ---
+    // Set up an interval to automatically move the carousel
     setInterval(() => {
-        const totalItems = document.querySelectorAll(".carousel-item").length;
-        currentIndex = (currentIndex + 1) % totalItems; // Increment index (loop back to the start if needed)
+        const totalItems = document.querySelectorAll(".carousel-item").length; // Get total number of items
+        currentIndex = (currentIndex + 1) % totalItems; // Increment index and wrap around if needed
         if (currentIndex === 0) {
-            // Special handling for resetting to the first item
+            // Reset to the first item without animation
             carousel.scrollTo({
-                left: 0, // Scroll to the extreme left (first image)
-                behavior: "instant", // Instantly reset without smooth animation
+                left: 0, // Scroll to the start
+                behavior: "instant", // Instantly reset
             });
         } else {
             scrollToIndex(currentIndex); // Scroll to the updated index
@@ -79,104 +91,96 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 3000); // Change items every 3 seconds
 
     // --- Recommendations Functionality ---
-    // Fetch users.json to get UID based on the username
+    // Fetch the users.json file
     fetch('../json/users.json')
-    .then(response => response.json())
+    .then(response => response.json()) // Parse the JSON response
     .then(users => {
-        console.log(localStorage.getItem("username"));
-        // Fetch the corresponding UID based on username
-        // Normalize the username (e.g., remove spaces and convert to lowercase)
-        const cleanedUsername = username.replace(/\s+/g, '').toLowerCase();  // Remove space if needed
-        
-        // Fetch the corresponding UID based on the normalized username
-        const UID = users[cleanedUsername];
-        console.log("Normalized Username:", cleanedUsername)
+        console.log(localStorage.getItem("username")); // Log the current username from local storage
+        const cleanedUsername = username.replace(/\s+/g, '').toLowerCase(); // Normalize the username
+        const UID = users[cleanedUsername]; // Get the UID for the normalized username
+        console.log("Normalized Username:", cleanedUsername);
 
         if (!UID) {
-            console.error("User not found");
+            console.error("User not found"); // Log error if UID is not found
             return;
         }
 
-        // Fetch recommendations.json to get the product recommendations for that UID
+        // Fetch the recommendations.json file
         fetch('../json/recommendations.json')
-        .then(response => response.json())
+        .then(response => response.json()) // Parse the JSON response
         .then(recommendations => {
-            // Get recommendations for the user based on UID
-            const userRecommendations = recommendations[UID]?.Recommendations;
+            const userRecommendations = recommendations[UID]?.Recommendations; // Get recommendations for the UID
 
             if (!userRecommendations) {
-                console.error("No recommendations found for this user");
+                console.error("No recommendations found for this user"); // Log error if no recommendations are found
                 return;
             }
 
-            console.log("User Recommendations:", userRecommendations);
-            // Get the carousel container
-            const carousel = document.querySelector(".carousel");
+            console.log("User Recommendations:", userRecommendations); // Log user recommendations
+            carousel.innerHTML = ''; // Clear the carousel
 
-            // Clear the carousel before adding new items
-            carousel.innerHTML = '';
-
-            // Loop through the recommendations and add the images to the carousel
-
+            // Loop through the recommendations and add items to the carousel
             userRecommendations.forEach(recommendation => {
-                const product = productImages[recommendation.PID];  // Use the PID from the recommendation
+                const product = productImages[recommendation.PID]; // Get product details by PID
                 if (product) {
-                    const productImageElement = document.createElement("div");
+                    const productImageElement = document.createElement("div"); // Create a new carousel item
                     productImageElement.classList.add("carousel-item");
 
-                    const img = document.createElement("img");
-                    img.src = product.imagePath;  // Set the image source using the product's image path
-                    img.alt = `${product.category} image`;  // Use the category for alt text
+                    const img = document.createElement("img"); // Create an image element
+                    img.src = product.imagePath; // Set the image source
+                    img.alt = `${product.category} image`; // Set the alt text
                     productImageElement.appendChild(img);
 
-                    // Optionally, add rating to each item
-                    const rating = document.createElement("p");
-                    rating.textContent = `Rating: ${recommendation.rating}`;
+                    const rating = document.createElement("p"); // Create a paragraph for the rating
+                    rating.textContent = `Rating: ${recommendation.rating}`; // Set the rating text
                     productImageElement.appendChild(rating);
 
-                    // Append the carousel item to the carousel
-                    carousel.appendChild(productImageElement);
+                    carousel.appendChild(productImageElement); // Append the item to the carousel
                 }
             });
         })
-        .catch(error => console.error("Error fetching recommendations:", error));
+        .catch(error => console.error("Error fetching recommendations:", error)); // Handle errors
     })
-    .catch(error => console.error("Error fetching users:", error));
+    .catch(error => console.error("Error fetching users:", error)); // Handle errors
 
     // --- Carousel Zooming Functionality ---
     carousel.addEventListener("mousemove", (e) => {
-        const target = e.target.closest(".carousel-item img");
+        const target = e.target.closest(".carousel-item img"); // Check if mouse is over an image
         if (target) {
-            const rect = target.getBoundingClientRect();
-            const offsetX = e.clientX - rect.left;
-            const offsetY = e.clientY - rect.top;
-
-            target.style.transformOrigin = `${(offsetX / rect.width) * 100}% ${(offsetY / rect.height) * 100}%`;
-            target.style.transform = "scale(1.05)";
-            target.style.transition = "transform 0.2s ease-in-out";
+            const rect = target.getBoundingClientRect(); // Get the image's bounding rectangle
+            const offsetX = e.clientX - rect.left; // Calculate X offset of the mouse
+            const offsetY = e.clientY - rect.top; // Calculate Y offset of the mouse
+            target.style.transformOrigin = `${(offsetX / rect.width) * 100}% ${(offsetY / rect.height) * 100}%`; // Adjust transform origin
+            target.style.transform = "scale(1.05)"; // Scale the image slightly
+            target.style.transition = "transform 0.2s ease-in-out"; // Add smooth transition effect
         }
     });
 
+    // Reset zoom effect when the mouse leaves the carousel
     carousel.addEventListener("mouseleave", () => {
         document.querySelectorAll(".carousel-item img").forEach((img) => {
-            img.style.transform = "scale(1)";
+            img.style.transform = "scale(1)"; // Reset scale
         });
     });
 });
 
 // --- Navbar Username Update ---
+// Get username from local storage or use a default value
 const username = localStorage.getItem("username") || "Chris Dave";
+// Split the username into first and last name
 const nameParts = username.split(" ");
-const firstName = nameParts.slice(0, -1).join(" ") || "Chris";
-const lastName = nameParts.slice(-1).join(" ") || "DAVE";
+const firstName = nameParts.slice(0, -1).join(" ") || "Chris"; // Get first name or default to "Chris"
+const lastName = nameParts.slice(-1).join(" ") || "DAVE"; // Get last name or default to "DAVE"
 
+// Update the navbar with the first and last name
 document.querySelector(".first-name").textContent = firstName;
 document.querySelector(".last-name").textContent = lastName;
 
+// Wait until the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
-    const cartCount = localStorage.getItem("cartCount") || 0;
-    const cartLink = document.getElementById("cart-link");
+    const cartCount = localStorage.getItem("cartCount") || 0; // Get the cart count from local storage or default to 0
+    const cartLink = document.getElementById("cart-link"); // Select the cart link element
     if (cartLink) {
-        cartLink.textContent = `Cart (${cartCount})`;
+        cartLink.textContent = `Cart (${cartCount})`; // Update the cart text with the count
     }
 });

@@ -213,13 +213,15 @@ h1 {
     border-radius: 10px; /* Optional: Rounded corners for the image */
 }
 
+/* Style for the rating text inside carousel items */
 .carousel-item .p.rating {
-    font-size: 50px;
-    color: #ffcc00;
-    font-weight: bold;
-    margin-top: 10px;
-    text-align: center;
+    font-size: 50px; /* Set the font size for the rating text */
+    color: #ffcc00; /* Use a bright yellow color for the rating text */
+    font-weight: bold; /* Make the rating text bold for emphasis */
+    margin-top: 10px; /* Add a margin at the top to create spacing above the rating */
+    text-align: center; /* Center-align the rating text within the carousel item */
 }
+
 
 /* Carousel Arrows */
 .carousel-arrow {
