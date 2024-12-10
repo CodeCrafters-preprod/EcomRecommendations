@@ -208,15 +208,27 @@ h1 {
 /* Image inside the carousel item */
 .carousel-item img {
     width: 100%; /* Image takes full width of container */
-    height: 70%; /* Image takes 70% of the height */
-    object-fit: cover; /* Prevent image distortion */
+    height: 80%; /* Image takes 70% of the height */
+    object-fit: contain; /* Ensure the whole image fits within the container without distortion */
+    object-position: center; /* Center the image */
     border-radius: 10px; /* Optional: Rounded corners for the image */
 }
 
+/* Style for the category text inside carousel items */
+.category-text{
+    font-size: 15px; /* Set the font size for the rating text */
+    font-family: 'Faculty Glyphic', 'Jaro', 'Rakkas', sans-serif; /* Use one of the imported fonts */
+    color: #6b3610; /* Use a bright yellow color for the rating text */
+    font-weight: bold; /* Make the rating text bold for emphasis */
+    margin-top: 10px; /* Add a margin at the top to create spacing above the rating */
+    text-align: center; /* Center-align the rating text within the carousel item */
+}
+
 /* Style for the rating text inside carousel items */
-.carousel-item .p.rating {
-    font-size: 50px; /* Set the font size for the rating text */
-    color: #ffcc00; /* Use a bright yellow color for the rating text */
+.rating-text {
+    font-size: 15px; /* Set the font size for the rating text */
+    font-family: 'Faculty Glyphic', 'Jaro', 'Rakkas', sans-serif; /* Use one of the imported fonts */
+    color: #1c9b33; /* Use a bright yellow color for the rating text */
     font-weight: bold; /* Make the rating text bold for emphasis */
     margin-top: 10px; /* Add a margin at the top to create spacing above the rating */
     text-align: center; /* Center-align the rating text within the carousel item */

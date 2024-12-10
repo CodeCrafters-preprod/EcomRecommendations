@@ -166,7 +166,7 @@ body {
     /* Space between buttons */
     gap: 15px;
     /* Add margin above and below the navbar */
-    margin: 20px 0;
+    margin: 70px 0;
   }
 
   /* Style for category buttons */
@@ -203,6 +203,7 @@ body {
 
   /* Style for the image wrapper */
   .image-wrapper {
+    margin-top: -50px;
     /* Padding around the wrapper */
     padding: 20px;
     /* Allow the wrapper to expand and fill the space */

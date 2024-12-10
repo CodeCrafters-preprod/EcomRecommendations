@@ -126,6 +126,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     const productImageElement = document.createElement("div"); // Create a new carousel item
                     productImageElement.classList.add("carousel-item");
 
+                    const category = document.createElement("p"); // Create a paragraph for the category
+                    category.textContent = `Category: ${product.category}`; // Set the category text
+                    category.classList.add("category-text"); // Add a class for styling
+                    productImageElement.appendChild(category);
+
                     const img = document.createElement("img"); // Create an image element
                     img.src = product.imagePath; // Set the image source
                     img.alt = `${product.category} image`; // Set the alt text
@@ -133,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     const rating = document.createElement("p"); // Create a paragraph for the rating
                     rating.textContent = `Rating: ${recommendation.rating}`; // Set the rating text
+                    rating.classList.add("rating-text");
                     productImageElement.appendChild(rating);
 
                     carousel.appendChild(productImageElement); // Append the item to the carousel

@@ -1,4 +1,28 @@
+/* 
+    META DATA - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    Developer details:
+        Name: Harshita Jangde, Prachi Tavse
+        Role: Architect
+
+    Version:
+        Version: V 1.0 (2 December 2024)
+        Developers: Harshita Jangde, Prachi Tavse
+        Unit test: Pass
+        Integration test: Pass
+
+    Description:
+        This JavaScript file defines the `productImages` object containing product IDs, categories, and image paths.
+        It exports the `productImages` object for use in other modules.
+
+    Dependencies:
+        - None
+
+    To use:
+        - Import the `productImages` object from this file into other JavaScript files to access product data.
+        - Example usage: `import productImages from './path/to/this/file';`
+
+*/
 const productImages = {
     "PID001": { "category": "Bag", "imagePath": "../products/Bag.png" },  // Corrected path
     "PID002": { "category": "Shoes", "imagePath": "../products/Shoes.png" },
