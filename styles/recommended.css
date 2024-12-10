@@ -189,10 +189,11 @@ h1 {
 /* Carousel Item */
 .carousel-item {
     min-width: 600px; /* Minimum width for each item */
-    height: 300px; /* Fixed height for items */
+    height: 350px; /* Fixed height for items */
     display: flex; /* Flexbox for arranging content */
     justify-content: center; /* Center-align content horizontally */
     align-items: center; /* Center-align content vertically */
+    flex-direction: column; /* Stack image and rating vertically */
     background-color: #f9f9f9; /* Light background for visibility */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
@@ -207,8 +208,17 @@ h1 {
 /* Image inside the carousel item */
 .carousel-item img {
     width: 100%; /* Image takes full width of container */
-    height: 100%; /* Image takes full height of container */
+    height: 70%; /* Image takes 70% of the height */
     object-fit: cover; /* Prevent image distortion */
+    border-radius: 10px; /* Optional: Rounded corners for the image */
+}
+
+.carousel-item .p.rating {
+    font-size: 50px;
+    color: #ffcc00;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
 }
 
 /* Carousel Arrows */
@@ -225,6 +235,7 @@ h1 {
 .carousel-arrow:hover {
     color: gray; /* Change arrow color on hover */
 }
+
 
 /* Footer Styling */
 footer {
